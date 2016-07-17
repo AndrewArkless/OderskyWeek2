@@ -1,13 +1,13 @@
 val half=new Rational(1,2)
 val quarter=new Rational(1,4)
-half add quarter
+half + quarter
 
 val x=new Rational(1,3)
 val y=new Rational(5,7)
 val z=new Rational(3,2)
-y add y
-x sub y sub z
-x less y
+y + y
+x - y - z
+x - y
 
 val a=new Rational(2)
 
@@ -27,18 +27,18 @@ class Rational(x:Int,y:Int){
   val numer=x/g
   val denom=y/g
 
-  def add(that:Rational)={
+  def + (that:Rational)={
     new Rational(numer * that.denom + that.numer*denom,
       denom*that.denom)
   }
-  
-  def neg:Rational=new Rational(-numer,denom)
 
-  def sub(that:Rational)=add(that.neg)
+  def unary_- : Rational=new Rational(-numer,denom)
 
-  def less(that:Rational)=numer*that.denom<that.numer*denom
+  def - (that:Rational)= this + -that
 
-  def max(that:Rational)=if (this less that) that else this
+  def < (that:Rational)=numer*that.denom<that.numer*denom
+
+  def max(that:Rational)=if (this < that) that else this
 
   override def toString={
     numer + "/" + denom
